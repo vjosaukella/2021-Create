@@ -1,10 +1,14 @@
 # Import Stuff
 import turtle as trtl
-
 # Add Variables
 t = trtl.Turtle()
 wn = trtl.Screen()
 pacman = trtl.Turtle()
+#SetUp
+pacman_image = "pacman.gif"
+wn.addshape(pacman_image)
+wn.title("PACMAN")
+wn.setup(1000,900)
 # set the turtle to the correct position
 t.penup()
 t.goto(-250, -200)
@@ -90,13 +94,15 @@ t.penup()
 t.forward(100)
 t.pendown()
 t.forward(100)
+t.hideturtle()
 # Create Pacman
 pacman.penup()
-pacman.shape("circle")
-pacman.pencolor("yellow")
-pacman.fillcolor("yellow")
-pacman.goto(-300, -50)
-pacman.shapesize(2.3,2.3,2.3)
+pacman.shape(pacman_image)
+#Make Pacman move
+pacman.goto(-300,-50)
+pacman.speed(0)
+
+
 
 
 
