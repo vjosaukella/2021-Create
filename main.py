@@ -1,10 +1,20 @@
 # Import Stuff
 import turtle as trtl
+import time
 
-# Add Variables
+# Initiaze Turtles
 maze = trtl.Turtle()
 wn = trtl.Screen()
 pacman = trtl.Turtle()
+
+counter = trtl.Turtle()
+counter.penup()
+counter.pencolor("white")
+counter.goto(-300, 400)
+counterInterval = 1000
+timer = 45
+timerUp = False
+fontSetup = ("Arial", 21, "white")
 # SetUp
 pacman_image = "pacman.gif"
 wn.addshape(pacman_image)
@@ -105,6 +115,18 @@ pacman.speed(0)
 speed = 1.5
 
 
+def countdown():
+    global timer, timerUp
+    counter.clear()
+    if timer <= 0:
+        counter.write("Time is up!", font=fontSetup)
+        timerUp = True
+    else:
+        counter.write("Timer: " + str(timer), font=fontSetup)
+        timer -= 1
+        counter.getscreen().ontimer(countdown, counterInterval)
+
+
 def travel():
     pacman.forward(speed)
     wn.ontimer(travel, 10)
@@ -115,14 +137,16 @@ wn.onkeypress(lambda: pacman.setheading(180), "Left")
 wn.onkeypress(lambda: pacman.setheading(0), "Right")
 wn.onkeypress(lambda: pacman.setheading(270), "Down")
 
-#Make Pacman stop if encounters maze
-
-
-
 wn.listen()
 travel()
+# Make Pacman stop if encounters border
+while True:
+    pacman.forward(speed)
 
-wn.mainloop()
+    if pacman.xcor() > 400 or pacman.xcor() < -400:
+        pacman.right(180)
+    if pacman.ycor() > 400 or pacman.ycor() < -300:
+        pacman.right(180)
 
 # Points
 # Scoreboard
