@@ -1,6 +1,5 @@
 # Import Stuff
 import turtle as trtl
-import time
 
 # Initiaze Turtles
 maze = trtl.Turtle()
@@ -127,6 +126,9 @@ def countdown():
         counter.getscreen().ontimer(countdown, counterInterval)
 
 
+wn.ontimer(countdown, counterInterval)
+
+
 def travel():
     pacman.forward(speed)
     wn.ontimer(travel, 10)
@@ -147,6 +149,7 @@ while True:
         pacman.right(180)
     if pacman.ycor() > 400 or pacman.ycor() < -300:
         pacman.right(180)
+
 
 # Points
 # Scoreboard
