@@ -2,6 +2,8 @@
 import turtle as trtl
 
 # Initiaze Turtles
+from turtle import Turtle
+
 maze = trtl.Turtle()
 wn = trtl.Screen()
 pacman = trtl.Turtle()
@@ -13,7 +15,7 @@ counter.goto(-300, 400)
 counterInterval = 1000
 timer = 45
 timerUp = False
-fontSetup = ("Arial", 21, "white")
+fontSetup = ("Arial", 21, "normal")
 # SetUp
 pacman_image = "pacman.gif"
 wn.addshape(pacman_image)
@@ -25,7 +27,7 @@ maze.goto(-250, -200)
 maze.pensize(15)
 maze.speed("fastest")
 maze.pencolor("blue")
-wn.bgcolor("black")
+wn.bgcolor("white")
 # making the maze
 maze.pendown()
 maze.forward(500)
@@ -114,21 +116,6 @@ pacman.speed(0)
 speed = 1.5
 
 
-def countdown():
-    global timer, timerUp
-    counter.clear()
-    if timer <= 0:
-        counter.write("Time is up!", font=fontSetup)
-        timerUp = True
-    else:
-        counter.write("Timer: " + str(timer), font=fontSetup)
-        timer -= 1
-        counter.getscreen().ontimer(countdown, counterInterval)
-
-
-wn.ontimer(countdown, counterInterval)
-
-
 def travel():
     pacman.forward(speed)
     wn.ontimer(travel, 10)
@@ -153,3 +140,17 @@ while True:
 
 # Points
 # Scoreboard
+# Timer
+def countdown():
+    global timer, timerUp
+    counter.clear()
+    if timer <= 0:
+        counter.write("Time is up!", font=fontSetup)
+        timerUp = True
+    else:
+        counter.write("Timer: " + str(timer), font=fontSetup)
+        timer -= 1
+        counter.getscreen().ontimer(countdown, counterInterval)
+
+
+wn.ontimer(countdown, counterInterval)
